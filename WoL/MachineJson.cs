@@ -22,7 +22,7 @@ namespace WoL
         {
             MachineList result = new MachineList();
             _addressJsonFile = File.Open(_saveFilePath, FileMode.OpenOrCreate);
-            if (_addressJsonFile.Length == 0)
+            if (_addressJsonFile.Length <= 2)
             {
                 Machine defaultMachine = new Machine();
                 result.Add(defaultMachine);

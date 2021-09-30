@@ -92,6 +92,7 @@ namespace WoL
         private void Button_Boot(object sender, RoutedEventArgs e)
         {
             Machine selected = (Machine)MachineList.SelectedItem;
+            if (selected == null) return;
             wolInfo.bootMachine(selected);
             return;
         }
@@ -99,23 +100,31 @@ namespace WoL
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             Machine selected = MachineList.SelectedItem as Machine;
-            selected.setMachine(Name.Text, getMAC(), getGateway(), getSubNet());
+            if(selected != null)
+            {
+                selected.setMachine(Name.Text, getMAC(), getGateway(), getSubNet());
+                MachineList.Items.Refresh();
+            }
+            else
+            {
+                machineList.Add(new Machine(Name.Text, getMAC(), getGateway(), getSubNet()));
+                MachineList.SelectedIndex = 0;
+            }
             machineJson.SaveJsonFile(machineList);
-            MachineList.Items.Refresh();
         }
 
         private void Button_Remove(object sender, RoutedEventArgs e)
         {
-           if(MachineList.SelectedItem != null)
-            {
-                machineList.Remove(MachineList.SelectedItem as Machine);
-                machineJson.SaveJsonFile(machineList);
-            }
+            if (MachineList.SelectedItem == null) return;
+            machineList.Remove(MachineList.SelectedItem as Machine);
+            machineJson.SaveJsonFile(machineList);
         }
 
         private void Button_Add(object sender, RoutedEventArgs e)
         {
-            machineList.Add(new Machine(Name.Text, getMAC(), getGateway(), getSubNet()));
+            Machine machine = new Machine(Name.Text, getMAC(), getGateway(), getSubNet());
+            machineList.Add(machine);
+            MachineList.SelectedItem = machine;
             machineJson.SaveJsonFile(machineList);
         }
 
