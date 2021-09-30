@@ -62,6 +62,14 @@ namespace WoL
             } 
         }
 
+        public Machine()
+        {
+            _name = "Default";
+            _macAddress = new string[] { "FF", "FF", "FF", "FF", "FF", "FF" };
+            _gatewayIP = new byte[] { 192, 168, 0, 1 };
+            _subnet = new byte[] { 255, 255, 255, 0 };
+        }
+
         public Machine(string name, string[] mac, byte[] gate, byte[] sub)
         {
             _name = name;
@@ -70,7 +78,15 @@ namespace WoL
             _subnet = sub;
         }
 
-        public string[] getMac()
+        public void setMachine(string name, string[] mac, byte[] gate, byte[] sub)
+        {
+            _name = name;
+            _macAddress = mac;
+            _gatewayIP = gate;
+            _subnet = sub;
+        }
+
+            public string[] getMac()
         {
             return _macAddress;
         }

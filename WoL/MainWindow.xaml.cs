@@ -27,14 +27,25 @@ namespace WoL
         {
             wolInfo = new wol();
             machineJson = new MachineJson();
-            machineList = new MachineList();
+            machineList = machineJson.ReadJsonFile();
             InitializeComponent();
             MachineList.ItemsSource = machineList;
+            MachineList.SelectedIndex = 0;
         }
 
         private byte str2hex(string strData)
         {
             return Convert.ToByte(strData, 16);
+        }
+
+        private byte[] ConvertSA2BA(string[] stringA)
+        {
+            byte[] result = new byte[4];
+            for(int idx = 0; idx < stringA.Length; ++idx)
+            {
+                result[idx] = Convert.ToByte(stringA[idx]);
+            }
+            return result;
         }
 
         private void setMAC(string[] mac)
@@ -47,12 +58,22 @@ namespace WoL
             addressF.Text = mac[5];
         }
 
+        private string[] getMAC()
+        {
+            return new string[] { addressA.Text, addressB.Text, addressC.Text, addressD.Text, addressE.Text, addressF.Text, };
+        }
+
         private void setGateway(byte[] gate)
         {
             gateA.Text = gate[0].ToString();
             gateB.Text = gate[1].ToString();
             gateC.Text = gate[2].ToString();
             gateD.Text = gate[3].ToString();
+        }
+
+        private byte[] getGateway()
+        {
+            return ConvertSA2BA(new string[] { gateA.Text, gateB.Text, gateC.Text, gateD.Text });
         }
 
         private void setSubNet(byte[] sub)
@@ -63,24 +84,24 @@ namespace WoL
             subD.Text = sub[3].ToString();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private byte[] getSubNet()
+        {
+            return ConvertSA2BA(new string[] { subA.Text, subB.Text, subC.Text, subD.Text });
+        }
+
+        private void Button_Boot(object sender, RoutedEventArgs e)
         {
             Machine selected = (Machine)MachineList.SelectedItem;
-            if (selected == null)
-            {
-                wolInfo.setMacAddress(str2hex(addressA.Text), str2hex(addressB.Text), str2hex(addressC.Text), str2hex(addressD.Text), str2hex(addressE.Text), str2hex(addressF.Text));
-            }
-            else
-            {
-                wolInfo.bootMachine(selected);
-            }
+            wolInfo.bootMachine(selected);
             return;
         }
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {
-            machineList.Add(new Machine(Name.Text, new string[] { addressA.Text, addressB.Text, (addressC.Text), (addressD.Text), (addressE.Text), (addressF.Text) }, new byte[] { Convert.ToByte(gateA.Text), Convert.ToByte(gateB.Text), Convert.ToByte(gateC.Text), Convert.ToByte(gateD.Text) }, new byte[] { Convert.ToByte(subA.Text), Convert.ToByte(subB.Text), Convert.ToByte(subC.Text), Convert.ToByte(subD.Text) }));
+            Machine selected = MachineList.SelectedItem as Machine;
+            selected.setMachine(Name.Text, getMAC(), getGateway(), getSubNet());
             machineJson.SaveJsonFile(machineList);
+            MachineList.Items.Refresh();
         }
 
         private void Button_Remove(object sender, RoutedEventArgs e)
@@ -88,7 +109,14 @@ namespace WoL
            if(MachineList.SelectedItem != null)
             {
                 machineList.Remove(MachineList.SelectedItem as Machine);
+                machineJson.SaveJsonFile(machineList);
             }
+        }
+
+        private void Button_Add(object sender, RoutedEventArgs e)
+        {
+            machineList.Add(new Machine(Name.Text, getMAC(), getGateway(), getSubNet()));
+            machineJson.SaveJsonFile(machineList);
         }
 
         private void MachineList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,5 +129,6 @@ namespace WoL
                 setSubNet(((sender as ListView).SelectedItem as Machine).getSubNet());
             }
         }
+
     }
 }

@@ -10,27 +10,38 @@ namespace WoL
 {
     class MachineJson
     {
+        private string _saveFilePath;
         private FileStream _addressJsonFile;
-        private string _addressListJson;
 
         public MachineJson()
         {
-            _addressJsonFile = File.Open("WolList.txt", FileMode.OpenOrCreate);
+            _saveFilePath = "WolList.txt";
+        }
+
+        public MachineList ReadJsonFile()
+        {
+            MachineList result = new MachineList();
+            _addressJsonFile = File.Open(_saveFilePath, FileMode.OpenOrCreate);
             if (_addressJsonFile.Length == 0)
             {
-                _addressListJson = JsonSerializer.Serialize("{ }");
+                Machine defaultMachine = new Machine();
+                result.Add(defaultMachine);
+                JsonSerializer.SerializeAsync(_addressJsonFile, result);
                 // _addressJsonFile.Write();
+                _addressJsonFile.Close();
             }
             else
             {
-
+                _addressJsonFile.Close();
+                string jsonString = File.ReadAllText(_saveFilePath);
+                result = JsonSerializer.Deserialize<MachineList>(jsonString);
             }
-            _addressJsonFile.Close();
+            return result;
         }
         
         async public void SaveJsonFile(MachineList list)
         {
-            _addressJsonFile = File.Open("WolList.txt", FileMode.OpenOrCreate);
+            _addressJsonFile = File.Open("WolList.txt", FileMode.Create);
             await JsonSerializer.SerializeAsync(_addressJsonFile, list);
             _addressJsonFile.Close();
         }

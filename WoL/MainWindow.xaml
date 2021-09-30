@@ -4,27 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Wake On Lan" Height="380" Width="290" ResizeMode="CanMinimize">
+        Title="Wake On Lan" Height="400" Width="300" ResizeMode="CanMinimize">
     <Grid>
-        <Button Content="Boot" HorizontalAlignment="Left" Margin="214,32,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="214,57,0,0" VerticalAlignment="Top" Width="60" Click="Button_Save"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="214,82,0,0" VerticalAlignment="Top" Width="60" Click="Button_Remove" />
-        <StackPanel HorizontalAlignment="Left" Height="160" Margin="10,13,0,0" VerticalAlignment="Top" Width="192">
+        <StackPanel HorizontalAlignment="Center" Height="160" Margin="220,13,5,0" VerticalAlignment="Top" Width="69">
+            <Button Content="Boot" HorizontalAlignment="Left" Margin="5,5,5,5"  VerticalAlignment="Top" Width="55" Click="Button_Boot"/>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Width="55" Click="Button_Add"/>
+            <Button Content="Save" HorizontalAlignment="Left" Margin="5,5,5,5"  VerticalAlignment="Top" Width="55" Click="Button_Save"/>
+            <Button Content="Remove" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Width="55" Click="Button_Remove" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="160" Margin="10,13,0,0" VerticalAlignment="Top" Width="205">
             <TextBlock TextWrapping="Wrap" Text="Name" />
-            <TextBox Name="Name" Text="MyServer" />
+            <TextBox Name="Name" Text="Default" />
             <TextBlock TextWrapping="Wrap" Text="MAC" />
-            <WrapPanel HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="185">
-                <TextBox Name="addressA" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+            <WrapPanel HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="205">
+                <TextBox Name="addressA" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
                 <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
-                <TextBox Name="addressB" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBox Name="addressB" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
                 <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
-                <TextBox Name="addressC" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBox Name="addressC" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
                 <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
-                <TextBox Name="addressD" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBox Name="addressD" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
                 <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
-                <TextBox Name="addressE" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBox Name="addressE" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
                 <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
-                <TextBox Name="addressF" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBox Name="addressF" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="30" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
             </WrapPanel>
             <TextBlock TextWrapping="Wrap" Text="Gateway"/>
             <WrapPanel Height="25"  VerticalAlignment="Top" Margin="0,0,7,0">
@@ -55,7 +58,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-
+        
     </Grid>
 </Window>
