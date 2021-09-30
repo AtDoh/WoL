@@ -1,0 +1,61 @@
+﻿<Window x:Class="WoL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Wake On Lan" Height="380" Width="290" ResizeMode="CanMinimize">
+    <Grid>
+        <Button Content="Boot" HorizontalAlignment="Left" Margin="214,32,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="214,57,0,0" VerticalAlignment="Top" Width="60" Click="Button_Save"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="214,82,0,0" VerticalAlignment="Top" Width="60" Click="Button_Remove" />
+        <StackPanel HorizontalAlignment="Left" Height="160" Margin="10,13,0,0" VerticalAlignment="Top" Width="192">
+            <TextBlock TextWrapping="Wrap" Text="Name" />
+            <TextBox Name="Name" Text="MyServer" />
+            <TextBlock TextWrapping="Wrap" Text="MAC" />
+            <WrapPanel HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="185">
+                <TextBox Name="addressA" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
+                <TextBox Name="addressB" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
+                <TextBox Name="addressC" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
+                <TextBox Name="addressD" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
+                <TextBox Name="addressE" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+                <TextBlock TextWrapping="Wrap" Text=":" FontSize="17"/>
+                <TextBox Name="addressF" Height="25" TextWrapping="Wrap" Text="FF" FontSize="17" Width="27" VerticalAlignment="Center" CharacterCasing="Upper" MaxLength="2"/>
+            </WrapPanel>
+            <TextBlock TextWrapping="Wrap" Text="Gateway"/>
+            <WrapPanel Height="25"  VerticalAlignment="Top" Margin="0,0,7,0">
+                <TextBox Name="gateA" Height="25" TextWrapping="Wrap" Text="192" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="gateB" Height="25" TextWrapping="Wrap" Text="168" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="gateC" Height="25" TextWrapping="Wrap" Text="0" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="gateD" Height="25" TextWrapping="Wrap" Text="1" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+            </WrapPanel>
+            <TextBlock TextWrapping="Wrap" Text="SubNet"/>
+            <WrapPanel HorizontalAlignment="Left" Height="25"  VerticalAlignment="Top" Width="185">
+                <TextBox Name="subA" Height="25" TextWrapping="Wrap" Text="255" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="subB" Height="25" TextWrapping="Wrap" Text="255" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="subC" Height="25" TextWrapping="Wrap" Text="255" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+                <TextBlock TextWrapping="Wrap" Text="." FontSize="17"/>
+                <TextBox Name="subD" Height="25" TextWrapping="Wrap" Text="0" FontSize="17" Width="35" VerticalAlignment="Center" MaxLength="3"/>
+            </WrapPanel>
+        </StackPanel>
+        <ListView Name="MachineList" Margin="10,178,10,10" SelectionChanged="MachineList_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="MAC" Width="160" DisplayMemberBinding="{Binding MacAddress}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+    </Grid>
+</Window>
